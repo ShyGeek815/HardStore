@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3 class="display-5">Магазин товаров бытовой техники</h3>
+    <br/>
+        {% if user.is_authenticated %}
+        <h4>Покупатели</h4><br/>
+        <p>
+          <!--<input type="button" class="btn btn-secondary" onclick="history.back();" value="Назад"/>-->
+          <input type="button" class="btn btn-secondary" onclick="history.back();" value="Назад"/>
+          <a class="btn btn-primary  sm-lg" href="{% url 'add_record' %}" role="button"><strong>Добавить покупателя</strong></a>
+          
+        </p>
+        <!--<a class="btn btn-primary" href="#" role="button">Link</a>-->
+        <table class="table table-bordered border-primary table-hover">
+          <thead class="table-primary">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Фамилия</th>
+              <th scope="col">Имя</th>
+              <th scope="col">Отчество</th>
+              <th scope="col">Телефон</th>
+              <th scope="col">Почта</th>
+              <th scope="col">Дата последней покупки</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <!-- Вставляю всю информацию из таблиц-->
+                  <!-- Отображение записей из таблицы Records -->
+                  {% if records %}
+                      {% for record in records %}
+                      <tr>
+                        <!-- Ссылка по ID -->
+                        <td><a href="{% url 'record' record.id %}">{{ record.id }}</a></td>
+                        <td>{{ record.familia }}</td>
+                        <td>{{ record.imya }}</td>
+                        <td>{{ record.otchestvo }}</td>
+                        <td>{{ record.phone }}</td>
+                        <td>{{ record.email }}</td>
+                        <td>{{ record.date_pockypki }}</td>
+                      </tr>
+                    {% endfor %}
+                  {% endif %}
+            
+          </tbody>
+        </table>
+
+
+        {% else %}
+        <div class="col-md-6 offset-md-3">
+        <h3>Вход в систему</h3>
+        <!-- Вход в систему (обратно отправляем на главную страницу) -->
+        <form method="POST" action="{% url 'home' %}">
+            <!-- токен_csrf, который является токеном межсайтового запроса (безопасность)-->
+            {% csrf_token %}
+            <form>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Логин</label>
+                  <input type="text" class="form-control" name="username" required>
+                  
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Пароль</label>
+                  <input type="password" class="form-control" name="password" required>
+                </div>
+              
+                <button type="submit" class="btn btn-primary">Войти</button>
+              </form>
+        </form>
+        
+    
+
+
+    </div>
+
+{% endif %}
+
+{% endblock %}

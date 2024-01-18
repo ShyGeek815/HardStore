@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+<h3>Добавить покупателя</h3><br/>
+
+    <form method="POST" action="{% url 'add_record' %}">
+        <!-- токен_csrf, который является токеном межсайтового запроса (безопасность)-->
+        {% csrf_token %}
+        {{form.as_p}}
+    <br/>
+    <input type="button" class="btn btn-secondary" onclick="history.back();" value="Назад"/>
+    <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+
+
+</div>
+    
+
+{% endblock %}

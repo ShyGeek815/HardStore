@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h4 class="display-5">Список складов магазина</h4></br>
+    <p>
+      <input type="button" class="btn btn-secondary" onclick="history.back();" value="Назад"/>
+    </p>
+    
+    <table class="table table-bordered border-primary table-hover">
+        <thead class="table-primary">
+          <tr>
+            <th scope="col">Номер склада</th>
+            <th scope="col">Наименование</th>
+            <th scope="col">Адрес</th>
+            <th scope="col">Телефон</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!-- Вставляю всю информацию из таблиц-->
+                <!-- Отображение записей из таблицы Storehouse -->
+                {% if storehouse %}
+                    {% for storehouse in storehouse %}
+                    <tr>
+                      <td>{{ storehouse.id }}</td>
+                      <td><strong>{{ storehouse.name_storehouse }}</strong></td>
+                      <td>{{ storehouse.adress_storehouse }}</td>
+                      <td>{{ storehouse.phone_storehouse }}</td>
+                    </tr>
+                  {% endfor %}
+                {% endif %}  
+        </tbody>
+      </table>
+{% endblock %}

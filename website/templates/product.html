@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<h4 class="display-5">Список товаров магазина</h4>     
+      <p>
+        <input type="button" class="btn btn-secondary" onclick="history.back();" value="Назад"/>
+        <a class="btn btn-primary  sm-lg" href="{% url 'add_product' %}" role="button"><strong>Добавить товар</strong></a>
+        
+      </p>
+        <table class="table table-bordered border-primary table-hover ">
+          <thead class="table-primary">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Артикул</th>
+              <th scope="col">Наименование товара</th>
+              <th scope="col">Бренд</th>
+              <th scope="col">Модель</th>
+              <th scope="col">Гарантия</th>
+              <th scope="col">Страна производитель</th>
+              <th scope="col">Цена</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <!-- Вставляю всю информацию из таблиц-->
+                  <!-- Отображение записей из таблицы hardstore_record -->
+                  {% if hardstore_record %}
+                      {% for hardstore_record in hardstore_record %}
+                      <tr>
+                        <td>{{ hardstore_record.id }}</td>
+                        <td><strong>{{ hardstore_record.name_category }}</strong></td>
+                        <td>{{ hardstore_record.name_product }}</td>
+                        <td>{{ hardstore_record.brand }}</td>
+                        <td>{{ hardstore_record.model_product }}</td>
+                        <td>{{ hardstore_record.warranty }}</td>
+                        <td>{{ hardstore_record.contry_product }}</td>
+                        <td>{{ hardstore_record.price_product }}</td>
+                        <td><a href="{% url  'delete_product' hardstore_record.id %}" class="btn btn-danger btn-sm">Удалить</a></td>
+                        <td><a href="{% url 'update_product' hardstore_record.id %}" class="btn btn-success  btn-sm">Изменить</a></td>
+                      </tr>
+                    {% endfor %}  
+                  {% endif %}
+            
+          </tbody>
+        </table>
+
+{% endblock %}

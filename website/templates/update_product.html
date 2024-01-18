@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-md-6 offset-md-3">
+<h3>Изменить товар</h3><br/>
+
+    <form method="POST">
+        <!-- токен_csrf, который является токеном межсайтового запроса (безопасность)-->
+        {% csrf_token %}
+        {{form.as_p}}
+    <br/>
+    <button type="submit" class="btn btn-primary">Изменить</button>
+    </form>
+
+
+</div>
+    
+
+{% endblock %}

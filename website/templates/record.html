@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h4 class="display-5">Данные о покупателе:</h4></br>
+
+<div class="card border-primary mb-3">
+  <div class="card-header">
+    <strong>Имя Фамилия Отчество:</strong> 
+    {{ customer_record.familia }} 
+		{{ customer_record.imya }}
+    {{ customer_record.otchestvo }}
+  </div>
+
+  <div class="card-body">
+    <p class="card-text">
+    <strong>Пол: </strong>{{customer_record.male_choice }}
+    </p>
+
+    <p class="card-text">
+    <strong>Дата рождения: </strong>{{customer_record.date_of_birth }}
+    </p>
+
+    <p class="card-text">
+    <strong>Электронная почта: </strong>{{customer_record.email }}
+    </p>
+    
+    <p class="card-text">
+    <strong>Контактный телефон: </strong>{{ customer_record.phone }}
+    </p>
+    
+    <p class="card-text">
+    <strong>Адрес проживания: </strong>{{ customer_record.address }}</p>
+
+    <p class="card-text">
+    <strong>Дата последней покупки: </strong>{{ customer_record.date_pockypki }}</p>
+
+  </div>
+</div>
+
+
+  <br/>
+  <input type="button" class="btn btn-secondary" onclick="history.back();" value="Назад"/>
+  <a href="{% url 'update_record' customer_record.id %}" class="btn btn-success">Изменить</a>
+  <a href="{% url 'delete_record' customer_record.id %}" class="btn btn-danger">Удалить</a>
+
+
+{% endblock %}
